@@ -21,7 +21,7 @@ cp -n ${WORKSPACE_ROOT}/env{.example,}.yaml
 
 sed -E -e "s#APPS_ROOT:.*#APPS_ROOT: ${APPS_ROOT}#" -i ${WORKSPACE_ROOT}/env.yaml
 
-elc start mysql
+elc start mysql proxy
 
 # ===== BASKET =========================================================================================================
 elc -c mysql mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS basket;'
@@ -33,6 +33,8 @@ elc -c basket run npm install
 elc -c basket run php artisan migrate:fresh
 elc -c basket run php artisan db:seed
 
+elc restart basket
+
 # ===== PRODUCT ========================================================================================================
 elc -c mysql mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS product;'
 
@@ -43,8 +45,12 @@ elc -c product run npm install
 elc -c product run php artisan migrate:fresh
 elc -c product run php artisan db:seed
 
+elc restart product
+
 # ===== API ============================================================================================================
 cp -n ${APPS_ROOT}/api/.env{.example,}
 elc -c api compose build
 elc -c api run composer install
 elc -c api run npm install
+
+elc restart api
