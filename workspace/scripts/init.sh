@@ -54,3 +54,8 @@ elc -c api run composer install
 elc -c api run npm install
 
 elc restart api
+
+# ===== API HYPERF =====================================================================================================
+cp -n ${APPS_ROOT}/api-hyperf/.env{.example,}
+elc -c api-hyperf compose build
+elc -c api-hyperf run composer install

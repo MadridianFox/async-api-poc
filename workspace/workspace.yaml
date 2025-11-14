@@ -50,3 +50,9 @@ services:
       SWOOLE_WORKERS: "5"
     dependencies:
       proxy: [ default ]
+
+  api-hyperf:
+    extends: hyperf
+    path: ${APPS_ROOT}/api-hyperf
+    dependencies:
+      proxy: [ default ]
