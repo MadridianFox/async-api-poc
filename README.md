@@ -43,10 +43,16 @@ php bin/hyperf.php start
 ## Запуск нагрузочных тестов
 
 Переходим в папку load-test и выполняем настройку [по инструкции](./load-test/README.md)  
-Запускаем тест
+Запускаем тест для сервиса api
 ```shell
 locust --headless --only-summary --host=http://api.example.127.0.0.1.nip.io/ --locustfile locustfiles/api.py
 ```
+
+Запускаем тест для сервиса api-hyperf
+```shell
+locust --headless --only-summary --host=http://api-hyperf.example.127.0.0.1.nip.io/ --locustfile locustfiles/api.py
+```
+
 Переходим на список тестов http://127.0.0.1:3000/d/load-test-list/list-of-tests  
 Новые тесты будут в низу списка. Могут появиться с задержкой в несколько секунд после старта теста.
 

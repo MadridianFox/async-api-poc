@@ -19,3 +19,6 @@ Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@i
 Router::get('/favicon.ico', function () {
     return '';
 });
+Router::post('/api/catalog/search', [CatalogController::class, 'search']);
+Router::get('/api/basket/current', [BasketController::class, 'currentBasket']);
+Router::post('/api/basket/current/set-item', [BasketController::class, 'setItem']);
