@@ -26,3 +26,9 @@ cp -n ${APPS_ROOT}/basket/.env{.example,}
 elc -c basket compose build
 elc -c basket run composer install
 elc -c basket run npm install
+
+# ===== PRODUCT =========================================================================================================
+cp -n ${APPS_ROOT}/product/.env{.example,}
+elc -c product compose build
+elc -c product run composer install
+elc -c product run npm install
