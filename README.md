@@ -6,7 +6,7 @@
 
 Клонируем репозиторий и регистрируем воркспейс
 ```shell
-git clone <>
+git clone git@github.com:MadridianFox/async-api-poc.git
 cd async-api-poc
 
 elc ws add example $PWD/workspace
