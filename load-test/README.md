@@ -1,6 +1,6 @@
 ## Установка
 
-Запускаем clickhouse и grafana
+Запускаем clickhouse, prometheus, cadvisor и grafana. Датасорс и дашборды настроятся автоматически
 ```bash
 docker compose up -d
 ```
@@ -27,7 +27,7 @@ locust --headless --only-summary --host=http://api.example.127.0.0.1.nip.io/ --l
 
 ## Прочее
 
-Посомтреть список тестов
+Посмотреть список тестов
 ```bash
 ./manage.py list_tests
 ```
@@ -35,4 +35,9 @@ locust --headless --only-summary --host=http://api.example.127.0.0.1.nip.io/ --l
 Удалить указанный тест
 ```bash
 ./manage.py delete_test <test_id>
+```
+
+Чтобы удалить вообще все тесты и метрики в prometheus, проще будет удалить volumes контейнеров
+```shell
+docker compose down -v
 ```
