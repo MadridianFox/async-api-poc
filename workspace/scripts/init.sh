@@ -21,13 +21,19 @@ cp -n ${WORKSPACE_ROOT}/env{.example,}.yaml
 
 sed -E -e "s#APPS_ROOT:.*#APPS_ROOT: ${APPS_ROOT}#" -i ${WORKSPACE_ROOT}/env.yaml
 
+elc start mysql
+
 # ===== BASKET =========================================================================================================
+elc -c mysql mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS basket;'
+
 cp -n ${APPS_ROOT}/basket/.env{.example,}
 elc -c basket compose build
 elc -c basket run composer install
 elc -c basket run npm install
 
-# ===== PRODUCT =========================================================================================================
+# ===== PRODUCT ========================================================================================================
+elc -c mysql mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS product;'
+
 cp -n ${APPS_ROOT}/product/.env{.example,}
 elc -c product compose build
 elc -c product run composer install
