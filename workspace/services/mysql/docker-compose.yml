@@ -1,0 +1,19 @@
+services:
+  app:
+    image: percona:8.0.36-28
+    networks:
+      - dev
+    hostname: mysql
+    volumes:
+      - "${SVC_PATH}/data:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+
+networks:
+  dev:
+    external: true
+    name: $NETWORK

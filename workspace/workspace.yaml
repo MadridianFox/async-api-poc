@@ -1,0 +1,26 @@
+name: example
+elc_min_version: 0.2.6
+variables:
+  APPS_ROOT: ${APPS_ROOT:-$DEFAULT_APPS_ROOT}
+  NETWORK: ${NETWORK:-ensi}
+  GROUP_ID: ${GROUP_ID:-1000}
+  USER_ID: ${USER_ID:-1000}
+  BASE_DOMAIN: example.127.0.0.1.nip.io
+  HOME_PATH: ${WORKSPACE_PATH}/home
+
+templates:
+  hyperf:
+    path: ${WORKSPACE_PATH}/templates/hyperf
+  octane:
+    path: ${WORKSPACE_PATH}/templates/octane
+
+services:
+  mysql:
+    path: ${WORKSPACE_PATH}/services/mysql
+
+  proxy:
+    path: ${WORKSPACE_PATH}/services/proxy
+    variables:
+      APP_IMAGE: dockerhub.greensight.ru/services/nginx-proxy:1.2.2-alpine
+    tags:
+      - system

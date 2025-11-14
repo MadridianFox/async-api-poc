@@ -1,0 +1,34 @@
+services:
+  app:
+    image: $WORKSPACE_NAME/octane:latest
+    build:
+      context: $TPL_PATH/php
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    hostname: "$APP_NAME.$BASE_DOMAIN"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      VIRTUAL_HOST: "$APP_NAME.$BASE_DOMAIN"
+      VIRTUAL_PORT: "8000"
+      HOME: /tmp/home
+      COMPOSER_HOME: /tmp/home/composer
+      COMPOSER_CACHE_DIR: /tmp/home/composer_cache
+      SWOOLE_WORKERS: $SWOOLE_WORKERS
+    working_dir: /var/www
+    entrypoint:
+      - "/usr/local/bin/entrypoint"
+    volumes:
+      - "$HOME_PATH:/tmp/home"
+      - "$HOME_PATH/.config:/.config"
+      - "$HOME_PATH/.npm:/.npm"
+      - "$TPL_PATH/php/entrypoint:/usr/local/bin/entrypoint"
+      - "$SVC_PATH:/var/www"
+    networks:
+      - dev
+
+networks:
+  dev:
+    external: true
+    name: $NETWORK

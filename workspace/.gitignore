@@ -1,0 +1,7 @@
+env.yaml
+
+home/.config/
+home/.npm/
+home/composer/
+home/composer_cache/
+services/mysql/data/

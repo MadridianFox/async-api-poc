@@ -1,0 +1,7 @@
+#!/bin/bash
+
+umask 0000
+
+cd /var/www
+
+php artisan octane:swoole --watch --host=0.0.0.0 --workers=$SWOOLE_WORKERS --task-workers=1 || sleep 3600
