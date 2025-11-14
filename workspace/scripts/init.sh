@@ -38,3 +38,9 @@ cp -n ${APPS_ROOT}/product/.env{.example,}
 elc -c product compose build
 elc -c product run composer install
 elc -c product run npm install
+
+# ===== API ============================================================================================================
+cp -n ${APPS_ROOT}/api/.env{.example,}
+elc -c api compose build
+elc -c api run composer install
+elc -c api run npm install

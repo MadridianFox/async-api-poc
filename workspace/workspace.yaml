@@ -42,3 +42,11 @@ services:
     dependencies:
       proxy: [ default ]
       mysql: [ default ]
+
+  api:
+    extends: octane
+    path: ${APPS_ROOT}/api
+    variables:
+      SWOOLE_WORKERS: "5"
+    dependencies:
+      proxy: [ default ]
