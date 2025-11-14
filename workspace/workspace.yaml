@@ -24,3 +24,12 @@ services:
       APP_IMAGE: dockerhub.greensight.ru/services/nginx-proxy:1.2.2-alpine
     tags:
       - system
+
+  basket:
+    extends: octane
+    path: ${APPS_ROOT}/basket
+    variables:
+      SWOOLE_WORKERS: "30"
+    dependencies:
+      proxy: [ default ]
+      mysql: [ default ]

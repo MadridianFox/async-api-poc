@@ -3,6 +3,7 @@
 export WORKSPACE_ROOT=$(realpath $(dirname ${BASH_SOURCE[0]})/../)
 export APPS_ROOT=$(realpath $(dirname ${BASH_SOURCE[0]})/../../apps)
 
+# ===== WORKSPACE ======================================================================================================
 read -r -d '' WS_DIRS << EOF
 ${WORKSPACE_ROOT}/home/.config
 ${WORKSPACE_ROOT}/home/.npm
@@ -19,3 +20,9 @@ done
 cp -n ${WORKSPACE_ROOT}/env{.example,}.yaml
 
 sed -E -e "s#APPS_ROOT:.*#APPS_ROOT: ${APPS_ROOT}#" -i ${WORKSPACE_ROOT}/env.yaml
+
+# ===== BASKET =========================================================================================================
+cp -n ${APPS_ROOT}/basket/.env{.example,}
+elc -c basket compose build
+elc -c basket run composer install
+elc -c basket run npm install
