@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('baskets/current', [BasketController::class, 'getCurrentBasket'])->name('baskets.current');
+Route::post('baskets/current/set-item', [BasketController::class, 'setItem'])->name('baskets.set-item');

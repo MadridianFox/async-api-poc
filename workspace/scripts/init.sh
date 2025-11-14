@@ -30,6 +30,8 @@ cp -n ${APPS_ROOT}/basket/.env{.example,}
 elc -c basket compose build
 elc -c basket run composer install
 elc -c basket run npm install
+elc -c basket run php artisan migrate:fresh
+elc -c basket run php artisan db:seed
 
 # ===== PRODUCT ========================================================================================================
 elc -c mysql mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS product;'
@@ -38,7 +40,7 @@ cp -n ${APPS_ROOT}/product/.env{.example,}
 elc -c product compose build
 elc -c product run composer install
 elc -c product run npm install
-elc -c product run php artisan migrate
+elc -c product run php artisan migrate:fresh
 elc -c product run php artisan db:seed
 
 # ===== API ============================================================================================================
