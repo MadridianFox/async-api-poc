@@ -38,6 +38,8 @@ cp -n ${APPS_ROOT}/product/.env{.example,}
 elc -c product compose build
 elc -c product run composer install
 elc -c product run npm install
+elc -c product run php artisan migrate
+elc -c product run php artisan db:seed
 
 # ===== API ============================================================================================================
 cp -n ${APPS_ROOT}/api/.env{.example,}
