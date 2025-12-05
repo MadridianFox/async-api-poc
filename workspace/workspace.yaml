@@ -53,7 +53,7 @@ services:
     extends: octane
     path: ${APPS_ROOT}/api
     variables:
-      SWOOLE_WORKERS: "5"
+      SWOOLE_WORKERS: "30"
     dependencies:
       proxy: [ default ]
 
