@@ -35,6 +35,7 @@ class BasketController extends Controller
         );
 
         $basket = $this->findCurrentBasketOrNew($request->getUserId(), $request->isWithItems());
+
         return BasketResource::make($basket);
     }
 
