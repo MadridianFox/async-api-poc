@@ -16,7 +16,7 @@ class BasketController extends Controller
     public function getCurrentBasket(CurrentBasketRequest $request): JsonResource
     {
         // simulate hard work
-        usleep(rand(50_000, 400_000));
+        usleep(rand(100_000, 300_000));
 
         $basket = $this->findCurrentBasketOrNew($request->getUserId(), $request->isWithItems());
 
@@ -26,7 +26,7 @@ class BasketController extends Controller
     public function setItem(SetItemRequest $request, SetItemAction $action): JsonResource
     {
         // simulate hard work
-        usleep(rand(500_000, 3000_000));
+        usleep(rand(100_000, 300_000));
 
         $action->execute(
             $this->findCurrentBasketOrNew($request->getUserId(), true),

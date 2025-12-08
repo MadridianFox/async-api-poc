@@ -40,6 +40,16 @@ return [
 
     'server' => env('OCTANE_SERVER', 'roadrunner'),
 
+    'swoole' => [
+        'options' => [
+            'dispatch_mode' => 3,
+            'send_yield' => false,
+            'tcp_fastopen' => true,
+            'open_tcp_nodelay' => true,
+        ],
+    ],
+
+
     /*
     |--------------------------------------------------------------------------
     | Force HTTPS
