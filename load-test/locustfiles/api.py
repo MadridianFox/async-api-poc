@@ -4,7 +4,7 @@ from gevent import time
 from yaml import safe_load
 import clickhouse_connect
 
-from locust import HttpUser, SequentialTaskSet, task, constant
+from locust import HttpUser, SequentialTaskSet, task, constant_pacing
 from common.LoadTest import LoadTest
 from common.ClickhouseResultsPlugin import ClickhouseResultsPlugin
 from common.StepLoadShape import StepLoadShape
@@ -39,7 +39,7 @@ class LoadShape(StepLoadShape):
         self.stages = [
             (1, 1),       # начинаем с одного пользователя, этот шаг лучше не удалять
             (30, 1),      # 30 секунд один пользователь
-            (60, 100),    # в течение 60 секунд линейно поднимаем до 100 пользователей
+            (120, 100),    # в течение 60 секунд линейно поднимаем до 100 пользователей
             (120, 100),   # 120 секунд держим 100 пользователей
         ]
         super().__init__()
@@ -49,7 +49,7 @@ clickhouse_results = ClickhouseResultsPlugin(load_test, ch_client, path_patterns
 
 
 class UnautorizedUser(HttpUser):
-    wait_time = constant(1)
+    wait_time = constant_pacing(1)
 
     @task(10)
     def get_products(self):

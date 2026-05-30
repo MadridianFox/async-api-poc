@@ -19,6 +19,8 @@ templates:
     variables:
       APP_IMAGE: fpm-8.1:latest
       NGINX_IMAGE: dockerhub.greensight.ru/services/nginx:1.19-alpine
+  go:
+    path: ${WORKSPACE_PATH}/templates/go
 
 services:
   mysql:
@@ -66,5 +68,11 @@ services:
   api-hyperf:
     extends: hyperf
     path: ${APPS_ROOT}/api-hyperf
+    dependencies:
+      proxy: [ default ]
+
+  api-go:
+    extends: go
+    path: ${APPS_ROOT}/api-go
     dependencies:
       proxy: [ default ]

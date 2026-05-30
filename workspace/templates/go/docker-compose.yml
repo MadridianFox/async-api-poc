@@ -1,0 +1,31 @@
+services:
+  app:
+    image: $WORKSPACE_NAME/go:latest
+    build:
+      context: $TPL_PATH
+    hostname: "$APP_NAME.$BASE_DOMAIN"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      VIRTUAL_HOST: "$APP_NAME.$BASE_DOMAIN"
+      VIRTUAL_PORT: "8080"
+      HOME: /tmp/home
+      GOCACHE: /tmp/home/.cache/go-build
+      GOMODCACHE: /tmp/home/.cache/go-mod
+      MS_BASKET_HOST: http://basket.example.127.0.0.1.nip.io:8000/
+      MS_PRODUCT_HOST: http://product.example.127.0.0.1.nip.io:8000/
+    working_dir: /var/www
+    entrypoint:
+      - "/usr/local/bin/entrypoint"
+    volumes:
+      - "$HOME_PATH:/tmp/home"
+      - "$HOME_PATH/.config:/.config"
+      - "$SVC_PATH:/var/www"
+      - "$TPL_PATH/entrypoint:/usr/local/bin/entrypoint"
+    networks:
+      - dev
+
+networks:
+  dev:
+    external: true
+    name: $NETWORK
